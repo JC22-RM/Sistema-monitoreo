@@ -2,156 +2,124 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8">
-<title>CENTIX - Diagnóstico IA</title>
 
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CENTIX | Inicio de Sesión</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 
-<body>
+<body class="login-body">
 
-<div class="sidebar">
+<div class="login-container">
 
-<div class="logo">
-CENTIX
-</div>
+    <div class="login-left">
 
-<div class="menu">
+        <img
+        src="{{ url_for('static', filename='img/logo_centix.png') }}"
+        class="logo-login">
 
-<a href="/">📊 Dashboard</a>
-<a href="/monitoreo">📡 Monitoreo</a>
-<a href="/diagnostico">🧠 Diagnóstico IA</a>
-<a href="/historial">📋 Historial</a>
-<a href="/reportes">📄 Reportes</a>
-<a href="/configuracion">⚙ Configuración</a>
+        <h2>Sistema de monitoreo en tiempo real</h2>
 
-</div>
+        <p>
+            Plataforma para monitoreo en tiempo real de la red,
+            detección de incidencias y diagnóstico inteligente.
+        </p>
 
-</div>
+        <ul>
 
-<div class="main">
+            <li>✔ Monitoreo de OLT</li>
 
-<h1>🧠 Diagnóstico Inteligente</h1>
+            <li>✔ Detección de LOS</li>
 
-<div class="card">
+            <li>✔ Diagnóstico</li>
 
-<h2>Analizador de Incidencias</h2>
+            <li>✔ Reportes Automáticos</li>
 
-<label>OLT</label>
-<select>
-<option>CENTRAL</option>
-<option>JUAN PABLO II</option>
-<option>JICAMARCA</option>
-</select>
+            <li>✔ Gestión de Incidencias</li>
 
-<br><br>
+        </ul>
 
-<label>Board</label>
-<input type="text" value="14">
+    </div>
 
-<br><br>
+    <div class="login-right">
 
-<label>Puerto</label>
-<input type="text" value="15">
+        <div class="login-card">
 
-<br><br>
+            <h2>Iniciar Sesión</h2>
 
-<label>Estado</label>
+            <p>Ingrese sus credenciales</p>
 
-<select id="estado">
-<option>LOS</option>
-<option>Power fail</option>
-<option>Offline</option>
-</select>
+            {% if error %}
 
-<br><br>
+            <div class="login-error">
 
-<label>Clientes afectados</label>
-<input type="number" id="clientes" value="15">
+                {{ error }}
 
-<br><br>
+            </div>
 
-<button onclick="diagnosticar()">
-Analizar
-</button>
+            {% endif %}
 
-</div>
+            <form action="/validar" method="POST">
 
-<br>
+    <div class="grupo">
+        <label>Usuario</label>
+        <input
+            type="text"
+            name="usuario"
+            placeholder="Ingrese su usuario"
+            required>
+    </div>
 
-<div class="card">
+    <div class="grupo">
+        <label>Contraseña</label>
+        <input
+            type="password"
+            name="password"
+            placeholder="Ingrese su contraseña"
+            required>
+    </div>
 
-<h2>Resultado</h2>
+    <button
+        type="submit"
+        class="login-btn">
+        🚀 Ingresar al Sistema
+    </button>
 
-<h3 id="prioridad">
-🔴 CRÍTICO
-</h3>
+</form>
 
-<p id="resultado">
-Posible corte de fibra principal.
+<p style="text-align:center;color:#64748b;font-size:13px;margin-top:15px;">
+Versión 1.0 • CENTIX • 2026
 </p>
 
-</div>
+</form>
+
+<div class="login-demo">
+
+<h3>🔒 Acceso Seguro</h3>
+
+<p>
+Sistema exclusivo para personal autorizado de CENTIX.
+</p>
+
+<p>
+Todas las actividades realizadas dentro del sistema
+son registradas y monitoreadas.
+</p>
+
+
+
+        </div>
+
+    </div>
 
 </div>
-
-<script>
-
-function diagnosticar(){
-
-let estado =
-document.getElementById("estado").value;
-
-let clientes =
-parseInt(
-document.getElementById("clientes").value
-);
-
-let resultado =
-document.getElementById("resultado");
-
-let prioridad =
-document.getElementById("prioridad");
-
-if(
-estado=="LOS"
-&& clientes>=10
-){
-
-prioridad.innerHTML="🔴 CRÍTICO";
-
-resultado.innerHTML=
-"Posible corte de fibra principal, FD o splitter.";
-
-}
-
-else if(
-estado=="LOS"
-&& clientes>=3
-){
-
-prioridad.innerHTML="🟠 RIESGO";
-
-resultado.innerHTML=
-"Posible afectación parcial.";
-
-}
-
-else{
-
-prioridad.innerHTML="🟢 NORMAL";
-
-resultado.innerHTML=
-"Incidencia menor.";
-
-}
-
-}
-
-</script>
 
 </body>
-
 </html>
+
+

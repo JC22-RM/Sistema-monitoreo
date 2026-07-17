@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>CENTIX - Dashboard</title>
 
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -19,27 +18,32 @@ href="{{ url_for('static', filename='css/style.css') }}">
 
 <div class="sidebar">
 
-```
-<div class="logo">
-    CENTIX
-</div>
+    <div class="logo">
+        CENTIX
+    </div>
 
-<div class="menu">
+    <div class="menu">
 
-    <a href="/">📊 Dashboard</a>
+        <a href="/dashboard?test=1">📊 Dashboard</a>
 
-    <a href="/monitoreo">📡 Monitoreo</a>
+        <a href="/monitoreo">📡 Monitoreo</a>
 
-    <a href="/diagnostico">🧠 Diagnóstico IA</a>
+        <a href="/diagnostico">🧠 Diagnóstico IA</a>
 
-    <a href="/historial">📋 Historial</a>
+        <a href="/historial">📋 Historial</a>
 
-    <a href="/reportes">📄 Reportes</a>
+        <a href="/reportes">📄 Reportes</a>
 
-    <a href="/configuracion">⚙ Configuración</a>
+        <a href="/usuarios">👥 Usuarios</a>
 
-</div>
-```
+        <a href="/configuracion">⚙ Configuración</a>
+
+        <hr>
+
+        <a href="/">🚪 Cerrar sesión</a>
+
+
+    </div>
 
 </div>
 
@@ -49,27 +53,35 @@ href="{{ url_for('static', filename='css/style.css') }}">
 
 <div class="cards">
 
-```
 <div class="card">
-    <h3>🟢 ONUs Online</h3>
-    <h1>5231</h1>
+<h3>📡 ONUs Monitoreadas</h3>
+<h1>5231</h1>
+<p>Total registradas</p>
+</div>
+
+<div class="card danger">
+<h3>🔴 Usuarios en LOS</h3>
+<h1>18</h1>
+<p>Sin señal óptica</p>
+</div>
+
+<div class="card warning">
+<h3>🚨 Incidencias Activas</h3>
+<h1>6</h1>
+<p>Eventos detectados</p>
+</div>
+
+<div class="card success">
+<h3>🛰 OLT con Incidencias</h3>
+<h1>2</h1>
+<p>Central / JP II</p>
 </div>
 
 <div class="card">
-    <h3>🔴 LOS</h3>
-    <h1>15</h1>
+<h3>🕒 Actualización</h3>
+<h1 id="hora">--:--:--</h1>
+<p>Tiempo real</p>
 </div>
-
-<div class="card">
-    <h3>🟠 Power Fail</h3>
-    <h1>8</h1>
-</div>
-
-<div class="card">
-    <h3>⚫ Offline</h3>
-    <h1>4</h1>
-</div>
-```
 
 </div>
 
@@ -77,148 +89,256 @@ href="{{ url_for('static', filename='css/style.css') }}">
 
 <div class="card">
 
-<h2>📊 Estado General de ONUs</h2>
-
-<canvas id="graficoEstados"></canvas>
-
-</div>
-
-<br>
-
-<div class="card">
-
-<h2>📈 Incidencias por OLT</h2>
-
-<canvas id="graficoOLT"></canvas>
-
-</div>
-
-<br>
-
-<div class="card">
-
-<h2>🥧 Distribución de Fallas</h2>
-
-<canvas id="graficoPie"></canvas>
-
-</div>
-
-<br>
-
-<h2>🚨 Resumen de Incidencias</h2>
+<h2>🚨 Estado de las OLT</h2>
 
 <table>
 
 <tr>
+
 <th>OLT</th>
-<th>Board</th>
-<th>Puerto</th>
-<th>LOS</th>
-<th>Power Fail</th>
-<th>Offline</th>
+
+<th>Clientes LOS</th>
+
 <th>Estado</th>
+
 </tr>
 
 <tr>
-<td>CENTRAL</td>
-<td>14</td>
+
+<td>HUAWEI CENTRAL</td>
+
 <td>15</td>
-<td>15</td>
-<td>0</td>
-<td>0</td>
-<td>🔴 Crítico</td>
+
+<td style="color:red;">CRÍTICO</td>
+
 </tr>
 
 <tr>
-<td>JICAMARCA</td>
-<td>5</td>
-<td>8</td>
-<td>0</td>
-<td>3</td>
-<td>1</td>
-<td>🟠 Riesgo</td>
-</tr>
 
-<tr>
 <td>JUAN PABLO II</td>
-<td>2</td>
-<td>4</td>
+
+<td>3</td>
+
+<td style="color:orange;">ADVERTENCIA</td>
+
+</tr>
+
+<tr>
+
+<td>JICAMARCA</td>
+
 <td>0</td>
-<td>0</td>
-<td>0</td>
-<td>🟢 Normal</td>
+
+<td style="color:lime;">NORMAL</td>
+
 </tr>
 
 </table>
 
 </div>
 
+<br>
+
+<div class="card">
+
+<h2>📊 Usuarios en LOS por OLT</h2>
+
+<div style="height:300px;">
+    <canvas id="graficoLOS"></canvas>
+</div>
+
+</div>
+
+<br>
+
+<div class="cards">
+
+    <div class="card danger">
+
+        <h3>🚨 Alerta Crítica</h3>
+
+        <h2>OLT HUAWEI CENTRAL</h2>
+
+        <p><b>Tarjeta:</b> 14</p>
+
+        <p><b>Puerto:</b> 15</p>
+
+        <p><b>Usuarios afectados:</b> 15</p>
+
+        <p><b>Tiempo en LOS:</b> 25 min</p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>🤖 Diagnóstico IA</h3>
+
+        <p>Se detectó una incidencia masiva en la Tarjeta 14 - Puerto 15.</p>
+
+        <br>
+
+        <p><b>Acción recomendada:</b></p>
+
+        <p>Verificar la fibra principal, la caja NAP y el splitter antes de generar visitas técnicas.</p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>📈 Resumen</h3>
+
+        <p>🟢 OLT Operativas: <b>1</b></p>
+
+        <p>🟠 En Riesgo: <b>1</b></p>
+
+        <p>🔴 Críticas: <b>1</b></p>
+
+        <p>👥 Usuarios afectados: <b>18</b></p>
+
+    </div>
+
+</div>
+
+
+<br>
+
+<h2>📋 Últimas Incidencias Detectadas</h2>
+
+<table>
+
+<tr>
+
+<th>Hora</th>
+
+<th>OLT</th>
+
+<th>Tarjeta</th>
+
+<th>Puerto</th>
+
+<th>Usuarios LOS</th>
+
+<th>Prioridad</th>
+
+</tr>
+
+<tr>
+
+<td>21:15</td>
+
+<td>HUAWEI CENTRAL</td>
+
+<td>14</td>
+
+<td>15</td>
+
+<td>15</td>
+
+<td>ALTA</td>
+
+</tr>
+
+<tr>
+
+<td>21:32</td>
+
+<td>JUAN PABLO II</td>
+
+<td>5</td>
+
+<td>8</td>
+
+<td>3</td>
+
+<td>MEDIA</td>
+
+</tr>
+
+<tr>
+
+<td>21:45</td>
+
+<td>JICAMARCA</td>
+
+<td>2</td>
+
+<td>4</td>
+
+<td>0</td>
+
+<td>NORMAL</td>
+
+</tr>
+
+</table>
+
 <script>
 
-new Chart(
-document.getElementById('graficoEstados'),
-{
-type:'bar',
+const hora = document.getElementById("hora");
 
-data:{
-labels:[
-'Online',
-'LOS',
-'Power Fail',
-'Offline'
-],
-
-datasets:[{
-label:'ONUs',
-data:[5231,15,8,4]
-}]
+function actualizarHora() {
+    const ahora = new Date();
+    hora.innerHTML = ahora.toLocaleTimeString();
 }
 
+actualizarHora();
+setInterval(actualizarHora,1000);
+
+new Chart(document.getElementById("graficoLOS"),{
+
+    type:"bar",
+
+    data:{
+
+        labels:[
+            "HUAWEI CENTRAL",
+            "JUAN PABLO II",
+            "JICAMARCA"
+        ],
+
+        datasets:[{
+
+            label:"Usuarios en LOS",
+
+            data:[15,3,0],
+
+            backgroundColor:[
+                "#ff3b30",
+                "#ff9500",
+                "#34c759"
+            ],
+
+            borderRadius:8
+
+        }]
+
+    },
+
+    options:{
+
+    responsive:true,
+
+    maintainAspectRatio:false,
+
+    plugins:{
+        legend:{
+            display:false
+        }
+    },
+
+    scales:{
+        y:{
+            beginAtZero:true
+        }
+    }
+
 }
-);
 
-new Chart(
-document.getElementById('graficoOLT'),
-{
-type:'bar',
-
-data:{
-labels:[
-'Central',
-'Juan Pablo II',
-'Jicamarca'
-],
-
-datasets:[{
-label:'Incidencias',
-data:[15,2,4]
-}]
-}
-
-}
-);
-
-new Chart(
-document.getElementById('graficoPie'),
-{
-type:'pie',
-
-data:{
-labels:[
-'LOS',
-'Power Fail',
-'Offline'
-],
-
-datasets:[{
-data:[15,8,4]
-}]
-}
-
-}
-);
+});
 
 </script>
+
+</div>
 
 </body>
 

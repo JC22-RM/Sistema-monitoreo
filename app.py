@@ -55,17 +55,16 @@ def login():
 @app.route("/validar", methods=["POST"])
 def validar():
 
-    usuario = request.form["usuario"]
-    password = request.form["password"]
+    usuario = request.form.get("usuario")
+    password = request.form.get("password")
 
     if usuario == "admin" and password == "123456":
         return redirect("/dashboard")
 
-    return """
-    <h2>❌ Usuario o contraseña incorrectos</h2>
-    <br>
-    <a href="/">Volver al Login</a>
-    """
+    return render_template(
+        "login.html",
+        error="❌ Usuario o contraseña incorrectos"
+    )
 
 
 # ==========================
@@ -186,6 +185,15 @@ def historial():
 @app.route("/reportes")
 def reportes():
     return render_template("reportes.html")
+
+
+# ==========================
+# USUARIOS
+# ==========================
+
+@app.route("/usuarios")
+def usuarios():
+    return render_template("usuarios.html")
 
 
 # ==========================

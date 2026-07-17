@@ -63,7 +63,7 @@ href="{{ url_for('static', filename='css/style.css') }}">
 
     <div class="menu">
 
-        <a href="/">📊 Dashboard</a>
+        <a href="/dashboard">📊 Dashboard</a>
 
         <a href="/monitoreo">📡 Monitoreo</a>
 
@@ -81,7 +81,31 @@ href="{{ url_for('static', filename='css/style.css') }}">
 
 <div class="main">
 
+<div style="display:flex;justify-content:space-between;align-items:center;">
+
+<div>
+
 <h1>📡 Monitoreo Inteligente</h1>
+
+<p style="color:gray;">
+Monitoreo en tiempo real de la red GPON
+</p>
+
+</div>
+
+<div>
+
+🟢 Sistema Activo
+
+<button>
+Actualizar
+</button>
+
+</div>
+
+</div>
+
+<br>
 
 <div class="cards">
 
@@ -109,6 +133,58 @@ href="{{ url_for('static', filename='css/style.css') }}">
 <h3>⚫ Offline</h3>
 <h1>{{ offline }}</h1>
 </div>
+
+</div>
+
+<br>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>🛰 OLT Operativas</h3>
+        <h2>3 / 3</h2>
+    </div>
+
+    <div class="card">
+        <h3>👥 Usuarios Afectados</h3>
+        <h2>33</h2>
+    </div>
+
+    <div class="card">
+        <h3>⏱ Tiempo Promedio</h3>
+        <h2>25 min</h2>
+    </div>
+
+    <div class="card">
+        <h3>🔄 Última Sincronización</h3>
+        <h2>Hace 1 min</h2>
+    </div>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<select>
+<option>Todas las OLT</option>
+<option>HUAWEI CENTRAL</option>
+<option>JUAN PABLO II</option>
+<option>JICAMARCA</option>
+</select>
+
+<select>
+<option>Todos los Estados</option>
+<option>LOS</option>
+<option>Power Fail</option>
+<option>Offline</option>
+</select>
+
+<input
+type="text"
+placeholder="Buscar ONU">
+
+<button>Buscar</button>
 
 </div>
 
@@ -204,8 +280,50 @@ PUERTO {{ alerta.port }}
 
 {% endif %}
 
+<br>
+
+<div class="card">
+
+<h2>📝 Actividad Reciente</h2>
+
+<table>
+
+<tr>
+<th>Hora</th>
+<th>Evento</th>
+</tr>
+
+<tr>
+<td>21:15</td>
+<td>LOS detectado en OLT CENTRAL</td>
+</tr>
+
+<tr>
+<td>21:28</td>
+<td>Power Fail en JP II</td>
+</tr>
+
+<tr>
+<td>21:36</td>
+<td>ONU recuperada</td>
+</tr>
+
+<tr>
+<td>21:44</td>
+<td>Sincronización completada</td>
+</tr>
+
+</table>
+
+</div>
+
+
 </div>
 
 </body>
+
+
+
+
 
 </html>

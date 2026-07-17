@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios | CENTIX</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<!-- MENU -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        CENTIX
+    </div>
+
+    <div class="menu">
+
+        <a href="/dashboard">📊 Dashboard</a>
+        <a href="/monitoreo">📡 Monitoreo</a>
+        <a href="/diagnostico">🧠 Diagnóstico IA</a>
+        <a href="/historial">📋 Historial</a>
+        <a href="/reportes">📄 Reportes</a>
+        <a href="/usuarios">👥 Usuarios</a>
+        <a href="/configuracion">⚙ Configuración</a>
+
+        <hr>
+
+        <a href="/">🚪 Cerrar sesión</a>
+
+    </div>
+
+</div>
+
+<!-- CONTENIDO -->
+
+<div class="main">
+
+    <h1>👥 Gestión de Usuarios</h1>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Usuarios Totales</h3>
+            <h1>12</h1>
+        </div>
+
+        <div class="card">
+            <h3>Administradores</h3>
+            <h1>2</h1>
+        </div>
+
+        <div class="card">
+            <h3>Soporte Técnico</h3>
+            <h1>8</h1>
+        </div>
+
+        <div class="card">
+            <h3>Inactivos</h3>
+            <h1>2</h1>
+        </div>
+
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+
+        <h2>Lista de Usuarios</h2>
+
+        <button class="btn-ver">
+            ➕ Nuevo Usuario
+        </button>
+
+    </div>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Usuario</th>
+            <th>Cargo</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>Jean Carlos</td>
+            <td>admin</td>
+            <td>Coordinador</td>
+            <td>Administrador</td>
+            <td><span class="estado verde">Activo</span></td>
+            <td>
+                <button class="btn-ver">✏ Editar</button>
+                <button class="btn-ia">🔒 Reset</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>2</td>
+            <td>Técnico 01</td>
+            <td>soporte01</td>
+            <td>Soporte</td>
+            <td>Técnico</td>
+            <td><span class="estado verde">Activo</span></td>
+            <td>
+                <button class="btn-ver">✏ Editar</button>
+                <button class="btn-ia">🔒 Reset</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>3</td>
+            <td>Técnico 02</td>
+            <td>soporte02</td>
+            <td>Soporte</td>
+            <td>Técnico</td>
+            <td><span class="estado rojo">Inactivo</span></td>
+            <td>
+                <button class="btn-ver">✏ Editar</button>
+                <button class="btn-ia">🔒 Reset</button>
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+</body>
+</html>
